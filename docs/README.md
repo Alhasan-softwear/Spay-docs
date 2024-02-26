@@ -1,86 +1,92 @@
-<!-- TODO: Update with your values. -->
-# DocsifyJS Template
-> Starter template for a Markdown-based docs site
+## Integration Overview and Rationale
 
- <!-- TODO: Update repo links and change license type if needed. -->
-[![GitHub tag](https://img.shields.io/github/tag/MichaelCurrin/docsify-js-template.svg)](https://GitHub.com/MichaelCurrin/docsify-js-template/tags/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/MichaelCurrin/docsify-js-template/blob/master/README#license)
+Integrating Spayment's APIs into your application is designed to be a seamless process, allowing you to quickly enable payment functionality without extensive development effort. Below, we provide an overview of the integration process and the rationale behind the design of our APIs.
 
-[![Made with latest Docsify](https://img.shields.io/npm/v/docsify/latest?label=docsify)](https://docsify.js.org/)
+### Integration Process
 
+1. **API Endpoints**: We offer two main API endpoints - `demo_checkout.php` and `live_checkout.php`. These endpoints cater to different environments: `demo_checkout.php` is meant for testing and development purposes, while `live_checkout.php` is for production use.
 
-<!-- TODO: You can delete the About and Create a Docsify site sections if you create a new project from this template -->
+2. **Request Parameters**: To initiate a payment transaction, you need to provide specific request parameters such as `email`, `public_key`, `private_key`, `redirect_url`, and `amount`. These parameters are essential for authenticating the transaction and specifying payment details.
 
-## About
+3. **Response Handling**: Responses from the API are sent through a cookie named `verification_transaction_spay`, enabling dynamic interaction with the payment form. Successful transactions result in a `00` response code, triggering the setting of the `verification_transaction_spay` cookie and redirection to the specified `redirect_url`. Error responses provide meaningful feedback to users regarding validation errors, network issues, or specific error codes from the Spayment gateway.
 
-This is a template for a simple but elegant docs site built on _Docsify_ which magically turns your markdown in your `docs` directory into a docs site. 
+4. **Example Usage**: We provide clear examples of how to use the API endpoints in HTML forms, demonstrating the required parameters and submission process. This facilitates quick integration into your application, requiring minimal coding effort.
 
-This is a statically-built site - just commit and push and your Github Pages site will re-deploy.
+### Time to Integration
 
-_Docsify.js_ runs as a _Single-Page Application_ on `index.html` - it relies on JavaScript to pull in content from markdown file, within the app shell. This gives a modern progressive web-app experience for instant page loads. But, this **not** SEO-friendly as crawlers don't like to or can't load JavaScript. So use a static site instead if you need to be found on search engines.
+The integration process with Spayment's APIs is designed to be efficient, allowing developers to seamlessly incorporate payment functionality into their applications in less than 10 minutes. By providing straightforward API endpoints, clear documentation, and example usage, we aim to streamline the integration process and minimize development overhead.
 
-If you want learn about _Docsify_ and how to customize a docs like this, follow this tutorial:
+### Rationale
 
-<div align="center">
-    <a href="https://michaelcurrin.github.io/docsify-js-tutorial/">
-        <img src="https://img.shields.io/badge/Teach_me-DocsifyJS_tutorial-blue" 
-            alt="DocsifyJS tutorial badge"
-            title="Go to tutorial">
-    </a>
-</div>
+- **Developer Experience**: We prioritize developer experience by offering intuitive APIs and comprehensive documentation. By simplifying the integration process, developers can focus on building innovative features without being burdened by complex payment setups.
+
+- **Flexibility**: The separation of `demo_checkout.php` and `live_checkout.php` endpoints provides flexibility for developers to test payment functionality in a controlled environment before deploying to production. This approach ensures a smooth transition from development to live deployment.
+
+- **Security**: We emphasize security best practices by securely managing API keys and avoiding their exposure in client-side code or public repositories. This protects sensitive information and mitigates potential security risks associated with payment processing.
+
+In summary, Spayment's APIs are designed to offer a seamless integration experience, prioritizing developer convenience, flexibility, and security. Our goal is to empower developers to effortlessly incorporate payment functionality into their applications, enabling smooth transactions for users.
 
 
-## Create a Docsify site
-> How to create your own docs site like this one
+## Demo checkout
 
-Click the button below to create your own copy of this repo.
+### Description
+The `demo_checkout.php` file serves as an endpoint for initiating a payment transaction through the Spayment gateway. It handles the validation of API keys, processing of payment requests, and interaction with the payment form.
 
-<div align="center">
-    <a href="https://github.com/MichaelCurrin/docsify-js-template/generate">
-        <img src="https://img.shields.io/badge/Generate-Use_this_template-2ea44f?style=for-the-badge" 
-            alt="Use this template"
-            title="Create repo from template">
-    </a>
-</div>
-
-<br>
-
-Then follow instructions in the original GitHub repo linked below. The `README.md` file covers how to set up docs site like this one.
-
-<div align="center">
-    <a href="https://github.com/MichaelCurrin/docsify-js-template">
-        <img src="https://img.shields.io/static/v1?label=MichaelCurrin&message=docsify-js-template&color=blue&style=for-the-badge&logo=github" 
-            alt="MichaelCurrin - docsify-js-template"
-            title="Go to template repo">
-    </a>
-</div>
-
-
-## Preview
-
-_TODO: Complete with your content - such as a screenshot of your app or command-line usage. You can also rename Preview to Sample._
-
-
-## Installation
-
-_TODO: Add your instructions here or link to an installation.md page._
-
-
-## Usage
-
-_TODO: Add your instructions here or link to a usage.md page._
-
-
-## Demo
-
-This section showcases some functionality of Docsify.
-
-```bash
-echo "Hello, World"
+### Endpoint
+```
+https://api.spayement.com.ng/v1/demo_checkout.php
 ```
 
-> Sample quote
+### Request Parameters
+- **email**: Email address of the user initiating the payment. *(Required)*
+- **public_key**: Public API key provided by Spayment for authentication. *(Required)*
+- **private_key**: Private API key provided by Spayment for authentication. *(Required)*
+- **redirect_url**: URL to redirect the user after a successful payment transaction. *(Required)*
+- **amount**: Amount to be charged for the transaction. *(Required)*
 
-?> Sample hint
+### Response
+Responses from `demo_checkout.php` are sent through a cookie named `verification_transaction_spay`. The responses are also handled dynamically through JavaScript interactions with the payment form.
 
-!> Sample warning 
+#### Successful Response
+If the payment transaction is successful, the response code will be `00`. In this case, the following actions are performed:
+1. A cookie named `verification_transaction_spay` is set to `success`.
+2. The user is redirected to the specified `redirect_url`.
+
+#### Error Response
+If there is an error during the payment transaction, appropriate error messages are displayed to the user via the payment form. Error responses include validation errors, network errors, or specific error codes returned by the Spayment gateway.
+
+### Example Usage
+```html
+<!-- Example Usage of demo_checkout.php -->
+<form action="https://api.spayement.com.ng/v1/demo_checkout.php" method="GET">
+    <input type="hidden" name="email" value="user@example.com">
+    <input type="hidden" name="public_key" value="your_public_key">
+    <input type="hidden" name="private_key" value="your_private_key">
+    <input type="hidden" name="redirect_url" value="https://example.com/success">
+    <input type="hidden" name="amount" value="1000">
+    <button type="submit">Proceed to Payment</button>
+</form>
+```
+
+### Notes
+- Ensure that the provided API keys (public_key and private_key) are valid and associated with your Spayment account.
+- The `redirect_url` should be a valid URL where users will be redirected after completing the payment transaction.
+- For security reasons, never expose private API keys in client-side code or public repositories.
+
+## Live checkout
+
+### Description
+The `checkout.php` file serves as an endpoint for initiating a payment transaction through the Spayment gateway in a live environment. It functions similarly to `demo_checkout.php` but is intended for production use.
+
+### Endpoint
+```
+https://api.spayement.com.ng/checkout.php
+```
+
+### Usage
+The usage of `checkout.php` is identical to `demo_checkout.php`. Please refer to the documentation for `demo_checkout.php` for details on request parameters, responses, and example usage.
+
+### Notes
+- Use `checkout.php` in your production environment to process real payment transactions.
+- Follow the same security and best practices outlined in the documentation for `demo_checkout.php`.
+- Ensure that your production API keys (public_key and private_key) are securely managed and never exposed in client-side code or public repositories.
