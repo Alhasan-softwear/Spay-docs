@@ -1,24 +1,20 @@
-<h1 id="cover-heading">
-  DocsifyJS Template  <!-- TODO: Update title -->
-</h1>
-
-[![GitHub tags](https://img.shields.io/github/tag/MichaelCurrin/docsify-js-template.svg)](https://GitHub.com/MichaelCurrin/docsify-js-template/tags/) <!-- TODO: Update username and repo name -->
-
->  Starter template for a Markdown-based docs site <!-- TODO: Replace with your description -->
+# Spay Developer Documentation
 
 
-<!-- TODO: Update to match your project's benefits/features. Git emojis work great here. -->
+> Explore the powerful features of Spay's APIs for seamless payment integration.
 
-- :hourglass_flowing_sand: Quickly set up an elegant, responsive site
-- :open_file_folder: Use your markdown docs as content
-- :sparkles: No compilation step and no templating syntax to learn
-- :nut_and_bolt: Built on [DocsifyJS](https://docsify.js.org/)
-- :pushpin: The library loads in the browser - no local dependencies
-- :cloud: Serve locally and on GitHub Pages or Netlify
+- :heavy_check_mark: Simple and intuitive API endpoints for easy integration
+- :money_with_wings: Support for secure online payments
+- :closed_lock_with_key: Robust security measures to protect user data and transactions
+- :globe_with_meridians: Cross-platform compatibility for web and mobile applications
+- :chart_with_upwards_trend: Real-time transaction monitoring and analytics
+- :globe_with_meridians: Built-in support for international transactions
+- :hourglass_flowing_sand: Fast and reliable payment processing
+- :handshake: Flexible integration options to suit your business needs
+- :bulb: Extensive documentation and developer resources for seamless implementation
+- :rocket: Continuous updates and improvements to enhance performance and functionality
 
+[Get Started](#spay-api-features)
 
-[Use this template](https://github.com/MichaelCurrin/docsify-js-template/generate) <!-- TODO: Remove on your copy of this template.-->
-[Get Started](#docsifyjs-template) <!-- TODO: Use ID of your homepage heading -->
-
-<!-- TODO: Set your background color or image. -->
-![color](#b3d9f8)
+<!-- Set your background color or image. -->
+![color](#6366f1)
